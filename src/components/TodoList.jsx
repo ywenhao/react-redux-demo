@@ -1,38 +1,30 @@
 import React from 'react'
-import store from '../store'
+import { connect } from "react-redux";
 import { changeInputValueAction, addItemAction, deleteItemAction, getMyListAction } from '../store/actionCreators'
 
 import TodoListUI from './TodoListUI'
 
-const TodoList = () => {
-  const [state, setState] = React.useState(store.getState())
-
-  const storeChange = () => {
-    setState(store.getState())
-  }
-
-  store.subscribe(storeChange)
-
+const TodoList = ({ dispatch, inputValue, list }) => {
   const changeInputValue = (e) => {
-    store.dispatch(changeInputValueAction(e))
+    dispatch(changeInputValueAction(e))
   }
 
   const clickBtn = () => {
-    state.inputValue && store.dispatch(addItemAction())
+    inputValue && dispatch(addItemAction())
   }
 
   const deleteItem = (index) => {
-    store.dispatch(deleteItemAction(index))
+    dispatch(deleteItemAction(index))
   }
 
   React.useEffect(() => {
-    store.dispatch(getMyListAction())
-  }, [])
+    dispatch(getMyListAction())
+  }, [dispatch])
 
   return (
     <TodoListUI
-      inputValue={state.inputValue}
-      list={state.list}
+      inputValue={inputValue}
+      list={list}
       clickBtn={clickBtn}
       deleteItem={deleteItem}
       changeInputValue={changeInputValue}
@@ -40,4 +32,9 @@ const TodoList = () => {
   )
 }
 
-export default TodoList
+const stateMapToProps = state => ({
+  inputValue: state.inputValue,
+  list: state.list
+})
+
+export default connect(stateMapToProps)(TodoList)
