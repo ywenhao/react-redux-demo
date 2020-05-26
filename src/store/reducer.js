@@ -18,6 +18,8 @@ export default (state = initailState, action) => {
       const list = [...state.list]
         list.splice(action.index, 1)
       return {...state, list}
+    case types.GET_LIST:
+      return {...state, list: action.data.list}
     default:
       return state
   }

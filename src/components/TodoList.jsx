@@ -1,32 +1,42 @@
 import React from 'react'
+import Axios from 'axios'
+import Api from '../config/api'
 import store from '../store'
-import { changeInputValue, addItem, deleteItem } from '../store/actionCreatores'
+import { changeInputValueAction, addItemAction, deleteItemAction, getListAction } from '../store/actionCreatores'
 
 import TodoListUI from './TodoListUI'
 
 const TodoList = () => {
   const [state, setState] = React.useState(store.getState())
-  const changeInputValueHandler = (e) => {
-    store.dispatch(changeInputValue(e))
+  const changeInputValue = (e) => {
+    store.dispatch(changeInputValueAction(e))
   }
   const clickBtn = () => {
-    state.inputValue && store.dispatch(addItem())
+    state.inputValue && store.dispatch(addItemAction())
   }
-  const deleteItemHandler = (index) => {
-    store.dispatch(deleteItem(index))
+  const deleteItem = (index) => {
+    store.dispatch(deleteItemAction(index))
   }
   const storeChange = () => {
     setState(store.getState())
   }
   store.subscribe(storeChange)
 
+  React.useEffect(() => {
+    const fetchData = async () => {
+      const result = await Axios(Api.listData)
+      store.dispatch(getListAction(result.data))
+    }
+    fetchData()
+  }, [])
+
   return (
     <TodoListUI
       inputValue={state.inputValue}
       list={state.list}
       clickBtn={clickBtn}
-      deleteItemHandler={deleteItemHandler}
-      changeInputValueHandler={changeInputValueHandler}
+      deleteItem={deleteItem}
+      changeInputValue={changeInputValue}
     />
   )
 }

@@ -22,7 +22,7 @@ const TodoListUI = props => {
           <Input
             placeholder='写点什么吧'
             value={props.inputValue}
-            onChange={props.changeInputValueHandler}
+            onChange={props.changeInputValue}
             onKeyDown={e => e.keyCode === 13 && props.clickBtn()}
           />
           <Button color='primary' variant='contained' onClick={props.clickBtn}>增加</Button>
@@ -32,7 +32,7 @@ const TodoListUI = props => {
             {props.list.map((v, i) => (
               <ListItem key={i}>
                 <ListItemText>{v}</ListItemText>
-                <IconButton color='secondary' aria-label='delete this item' onClick={() => props.deleteItemHandler(i)}>
+                <IconButton color='secondary' aria-label='delete this item' onClick={() => props.deleteItem(i)}>
                   <DeleteForeverOutlined />
                 </IconButton>
               </ListItem>
