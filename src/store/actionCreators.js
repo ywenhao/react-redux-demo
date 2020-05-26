@@ -1,4 +1,6 @@
 import * as types from './actionTypes'
+import Axios from 'axios'
+import Api from '../config/api'
 
 export const changeInputValueAction = e => {
   return {
@@ -24,5 +26,11 @@ export const getListAction = data => {
   return {
     type: types.GET_LIST,
     ...data
+  }
+}
+
+export const getTodoList = () => {
+  return dispatch => {
+    Axios(Api.listData).then(res => dispatch(getListAction(res.data)))
   }
 }
