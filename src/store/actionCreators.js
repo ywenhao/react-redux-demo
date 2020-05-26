@@ -29,8 +29,16 @@ export const getListAction = data => {
   }
 }
 
+// redux-thunk 的异步数据请求
 export const getTodoList = () => {
   return dispatch => {
     Axios(Api.listData).then(res => dispatch(getListAction(res.data)))
+  }
+}
+
+// redux-saga 的数据请求
+export const getMyListAction = () => {
+  return {
+    type: types.GET_MY_LIST
   }
 }

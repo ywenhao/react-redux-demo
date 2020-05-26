@@ -1,6 +1,6 @@
 import React from 'react'
 import store from '../store'
-import { changeInputValueAction, addItemAction, deleteItemAction, getTodoList } from '../store/actionCreators'
+import { changeInputValueAction, addItemAction, deleteItemAction, getMyListAction } from '../store/actionCreators'
 
 import TodoListUI from './TodoListUI'
 
@@ -26,7 +26,7 @@ const TodoList = () => {
   }
 
   React.useEffect(() => {
-    store.dispatch(getTodoList())
+    store.dispatch(getMyListAction())
   }, [])
 
   return (
