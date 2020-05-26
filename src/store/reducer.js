@@ -10,11 +10,11 @@ const initailState = {
 
 export default (state = initailState, action) => {
   switch (action.type) {
-    case types.change_input_value:
+    case types.CHANGE_INPUT_VALUE:
       return {...state, inputValue: action.inputValue}
-    case types.add_item:
+    case types.ADD_ITEM:
       return {...state, inputValue: '', list: [state.inputValue, ...state.list]}
-    case types.delete_item:
+    case types.DELETE_ITEM:
       const list = [...state.list]
         list.splice(action.index, 1)
       return {...state, list}

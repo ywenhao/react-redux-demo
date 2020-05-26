@@ -1,3 +1,4 @@
-export const change_input_value = 'change_input_value'
-export const add_item = 'add_item'
-export const delete_item = 'delete_item'
+export const CHANGE_INPUT_VALUE = 'CHANGE_INPUT_VALUE'
+export const ADD_ITEM = 'ADD_ITEM'
+export const DELETE_ITEM = 'DELETE_ITEM'
+export const GET_LIST = 'GET_LIST'
